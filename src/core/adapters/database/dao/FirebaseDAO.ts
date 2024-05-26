@@ -12,7 +12,7 @@
  */
 
 import { firebase } from '@/configs/db'
-import { DAO } from '@/core/domain/database/DAO'
+import { DAO } from '@/core/database/DAO'
 import {
   DocumentData,
   PartialWithFieldValue,
