@@ -12,7 +12,7 @@
  */
 
 import { firebase } from "@/configs/db";
-import { DAO } from "@/domain/database/DAO";
+import { DAO } from "@/core/domain/database/DAO";
 import { DocumentData, PartialWithFieldValue, collection, doc, getDocs, getFirestore, setDoc } from "firebase/firestore";
 
 export class FirebaseDAO<T extends DocumentData> implements DAO<PartialWithFieldValue<T>> {

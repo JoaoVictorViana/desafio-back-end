@@ -1,4 +1,4 @@
-import { FirebaseDAO } from '@/adapters/database/dao/FirebaseDAO'
+import { FirebaseDAO } from '@/core/adapters/database/dao/FirebaseDAO'
 import { NextRequest, NextResponse } from 'next/server'
  
 type ResponseData = {
