@@ -12,18 +12,18 @@
  */
 
 export type Client = {
-    id?: string
-    name: string
-    email: string
-    telephone: number
-    address: string
+  id?: string
+  name: string
+  email: string
+  telephone: number
+  address: string
 }
 
 export type ServiceOrder = {
-    id?: string
-    client_id: string
-    description: string
-    cost: number
-    observation?: string
-    dt_order: Date
+  id?: string
+  client_id: string
+  description: string
+  cost: number
+  observation?: string
+  dt_order: Date
 }

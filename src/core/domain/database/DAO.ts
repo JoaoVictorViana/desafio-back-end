@@ -13,6 +13,7 @@
  */
 
 export interface DAO<T> {
-    addData(target: string, id: string, data: T): Promise<T>
-    getData(target: string, id: string, params: any): Promise<T[] | T | undefined>
+  addData(target: string, id: string, data: T): Promise<T>
+  getData(target: string, id: string, params: any): Promise<T[] | T | undefined>
+  deleteData(target: string, id: string, params: any): void
 }

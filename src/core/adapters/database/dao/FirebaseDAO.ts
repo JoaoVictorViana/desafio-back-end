@@ -11,34 +11,62 @@
  * Este script é parte o curso de ADS.
  */
 
-import { firebase } from "@/configs/db";
-import { DAO } from "@/core/domain/database/DAO";
-import { DocumentData, PartialWithFieldValue, collection, doc, getDocs, getFirestore, setDoc } from "firebase/firestore";
+import { firebase } from '@/configs/db'
+import { DAO } from '@/core/domain/database/DAO'
+import {
+  DocumentData,
+  PartialWithFieldValue,
+  collection,
+  doc,
+  getDocs,
+  getFirestore,
+  setDoc,
+  addDoc,
+  deleteDoc,
+} from 'firebase/firestore'
 
-export class FirebaseDAO<T extends DocumentData> implements DAO<PartialWithFieldValue<T>> {
-    constructor(private db = getFirestore(firebase)) {}
+export class FirebaseDAO<T extends DocumentData>
+  implements DAO<PartialWithFieldValue<T>>
+{
+  constructor(private db = getFirestore(firebase)) {
+    //
+  }
 
-    async addData(target: string, id: string, data: T): Promise<T> {
-        await setDoc(doc(this.db, target, id), data, {
-            merge: true,
-        })
+  async addData(target: string, id: string, data: T): Promise<T> {
+    if (!id) {
+      const document = await addDoc(collection(this.db, target), data)
 
-        return data
+      return { id: document.id, ...data }
     }
 
-    async getData(target: string, id?: string, params?: any): Promise<T[] | T | undefined> {
-        return getDocs(collection(this.db, target)).then(querySnapshot => {
-            let result: T[] = []
-    
-            querySnapshot.forEach((doc) => {
-                result.push({id: doc.id, ...doc.data() as T})
-            });
-    
-            if (id) {
-                return result.find(doc => doc.id === id)
-            }
-            
-            return result
-        })
-    }
+    await setDoc(doc(this.db, target, id), data, {
+      merge: true,
+    })
+
+    return { id, ...data }
+  }
+
+  async getData<R extends PartialWithFieldValue<T>>(
+    target: string,
+    id?: string,
+    params?: any
+  ): Promise<R[] | R | undefined> {
+    return getDocs(collection(this.db, target)).then((querySnapshot) => {
+      const result: R[] = []
+
+      querySnapshot.forEach((document) => {
+        result.push({ id: document.id, ...(document.data() as R) })
+      })
+
+      if (id) {
+        return result.find((document) => document.id === id)
+      }
+
+      return result
+    })
+  }
+
+  deleteData(target: string, id: string) {
+    deleteDoc(doc(this.db, target, id))
+  }
 }

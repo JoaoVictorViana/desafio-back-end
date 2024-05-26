@@ -1,0 +1,11 @@
+{
+    "editor.tabSize": 2,
+    "files.eol": "\n",
+    "editor.formatOnSave": true,
+    "jest.autoRun": {
+        "watch": false,
+        "onSave": ".vscode/tests/jest",
+        "onStartup": ["all-tests"]
+    },
+    "jest.coverageFormatter": "GutterFormatter"
+}
