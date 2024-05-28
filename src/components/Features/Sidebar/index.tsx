@@ -21,15 +21,17 @@ export const StandarSidebar = () => {
         </Link>
         <Link
           href="/clients"
-          className={`${pathname === '/clients' && 'menu-item--active'
-            } menu-item group`}
+          className={`${
+            pathname === '/clients' && 'menu-item--active'
+          } menu-item group`}
         >
           Clientes
         </Link>
         <Link
           href="/service-orders"
-          className={`${pathname === '/service-orders' && 'menu-item--active'
-            } menu-item group`}
+          className={`${
+            pathname === '/service-orders' && 'menu-item--active'
+          } menu-item group`}
         >
           Ordem de Serviços
         </Link>
