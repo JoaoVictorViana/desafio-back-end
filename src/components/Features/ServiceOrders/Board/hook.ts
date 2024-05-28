@@ -172,13 +172,19 @@ export function useBoard() {
 
       if (!serviceOrder) return
 
-      queryClient.removeQueries({
-        queryKey: ['service-orders', { status: serviceOrder.status }],
-      })
+      queryClient.setQueriesData(
+        {
+          queryKey: ['service-orders', { status: serviceOrder.status }],
+        },
+        null
+      )
 
       deleteServiceOrderMutation
         .mutateAsync(id)
         .then(() => {
+          queryClient.refetchQueries({
+            queryKey: ['service-orders', { status: serviceOrder.status }],
+          })
           toast(`Ordem de serviço deletada com sucesso!`)
         })
         .catch(() =>

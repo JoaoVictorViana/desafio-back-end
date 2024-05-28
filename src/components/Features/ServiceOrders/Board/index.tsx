@@ -50,7 +50,7 @@ export const ServiceOrderBoard = () => {
           <header className="board-list--header">A Fazer</header>
           {!serviceOrdersTodo && (
             <Flex className="board-list--body">
-              {Array.from(Array(2).keys()).map((item, index) => (
+              {Array.from(Array(3).keys()).map((item, index) => (
                 <SkeletonItemList key={`todo-${index + 1}`} />
               ))}
             </Flex>
@@ -88,7 +88,7 @@ export const ServiceOrderBoard = () => {
           <header className="board-list--header">Em progresso</header>
           {!serviceOrdersInProgress && (
             <Flex className="board-list--body">
-              {Array.from(Array(2).keys()).map((item, index) => (
+              {Array.from(Array(3).keys()).map((item, index) => (
                 <SkeletonItemList key={`todo-${index + 1}`} />
               ))}
             </Flex>
@@ -129,7 +129,7 @@ export const ServiceOrderBoard = () => {
           <header className="board-list--header">Impedimento</header>
           {!serviceOrdersImpediment && (
             <Flex className="board-list--body">
-              {Array.from(Array(2).keys()).map((item, index) => (
+              {Array.from(Array(3).keys()).map((item, index) => (
                 <SkeletonItemList key={`todo-${index + 1}`} />
               ))}
             </Flex>
@@ -170,7 +170,7 @@ export const ServiceOrderBoard = () => {
           <header className="board-list--header">Concluído</header>
           {!serviceOrdersDone && (
             <Flex className="board-list--body">
-              {Array.from(Array(2).keys()).map((item, index) => (
+              {Array.from(Array(3).keys()).map((item, index) => (
                 <SkeletonItemList key={`todo-${index + 1}`} />
               ))}
             </Flex>
@@ -231,7 +231,7 @@ export const ServiceOrderBoard = () => {
         <Modal
           open={updateModal}
           onChangeOpen={handleChangeUpdateModal}
-          className="!w-auto !h-auto"
+          className="!w-auto !h-60 overflow-y-auto"
           title="Cadastrar Ordem de Serviço"
         >
           <ServiceOrderForm

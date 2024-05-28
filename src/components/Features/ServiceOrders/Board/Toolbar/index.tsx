@@ -27,7 +27,7 @@ export const ServiceOrderToolbar = () => {
       <Modal
         open={openModal}
         onChangeOpen={handleOpenChangeModal}
-        className="!w-auto !h-auto"
+        className="!w-auto !h-60 overflow-y-auto"
         title="Cadastrar Ordem de Serviço"
       >
         <ServiceOrderForm afterSubmit={() => setOpenModal(false)} />
