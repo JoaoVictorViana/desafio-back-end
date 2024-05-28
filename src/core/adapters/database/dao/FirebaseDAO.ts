@@ -41,7 +41,7 @@ export class FirebaseDAO<T extends DocumentData>
         updated_at: Timestamp.now(),
       })
 
-      return { id: document.id, ...data }
+      return { ...data, id: document.id }
     }
 
     await setDoc(
@@ -52,7 +52,7 @@ export class FirebaseDAO<T extends DocumentData>
       }
     )
 
-    return { id, ...data }
+    return { ...data, id }
   }
 
   async getData<R extends PartialWithFieldValue<T>>(
