@@ -231,7 +231,7 @@ export const ServiceOrderBoard = () => {
         <Modal
           open={updateModal}
           onChangeOpen={handleChangeUpdateModal}
-          className="!w-auto !h-60 overflow-y-auto"
+          className="!w-auto !h-[60vh] overflow-y-auto"
           title="Cadastrar Ordem de Serviço"
         >
           <ServiceOrderForm
