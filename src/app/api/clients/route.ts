@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
 
   const clients = await clientRepository.all()
   const page = Number(request.nextUrl.searchParams.get('page') ?? 0)
-  const perPage = Number(request.nextUrl.searchParams.get('per_page') ?? 0)
+  const perPage = Number(request.nextUrl.searchParams.get('per_page') ?? 15)
 
   if (page) {
     return new NextResponse(

@@ -12,17 +12,28 @@
  */
 
 import repositories from '@/configs/repositories'
+import { ServiceOrderStatus } from '@/core/entities'
 import { ServiceOrderRepository } from '@/core/repositories/ServiceOrder/ServiceOrderRepository'
+import { ServiceOrderService } from '@/core/services/ServiceOrderService'
 import { serviceOrderSchema } from '@/schemas/serviceOrder'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
-  const serviceOrderRepository: ServiceOrderRepository =
-    new repositories.ServiceOrder()
+  const serviceOrderService = new ServiceOrderService()
 
-  const serviceOrders = await serviceOrderRepository.all()
+  const serviceOrders = await serviceOrderService.getAllWithClients()
   const page = Number(request.nextUrl.searchParams.get('page') ?? 0)
   const perPage = Number(request.nextUrl.searchParams.get('per_page') ?? 0)
+  const status = request.nextUrl.searchParams.get('status') ?? ''
+
+  if (status) {
+    return new NextResponse(
+      JSON.stringify(serviceOrders.filter((item) => item.status === status)),
+      {
+        status: 200,
+      }
+    )
+  }
 
   if (page) {
     return new NextResponse(
@@ -55,7 +66,12 @@ export async function POST(request: NextRequest) {
     })
 
     return new NextResponse(
-      JSON.stringify(await serviceOrderRepository.save(serviceOrder)),
+      JSON.stringify(
+        await serviceOrderRepository.save({
+          ...serviceOrder,
+          status: serviceOrder.status as ServiceOrderStatus,
+        })
+      ),
       {
         status: 200,
       }

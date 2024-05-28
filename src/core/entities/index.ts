@@ -17,13 +17,22 @@ export type Client = {
   email: string
   telephone: number
   address: string
+  created_at: Date
+  updated_at: Date
 }
+
+export type ServiceOrderStatus = 'todo' | 'in progress' | 'impediment' | 'done'
 
 export type ServiceOrder = {
   id?: string
   client_id: string
+  client?: Client
   description: string
+  status: ServiceOrderStatus
   cost: number
+  cost_estimated: number
   observation?: string
   dt_order: Date
+  created_at: Date
+  updated_at: Date
 }

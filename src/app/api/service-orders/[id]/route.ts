@@ -11,6 +11,7 @@
  */
 
 import repositories from '@/configs/repositories'
+import { ServiceOrderStatus } from '@/core/entities'
 import { ServiceOrderRepository } from '@/core/repositories/ServiceOrder/ServiceOrderRepository'
 import { serviceOrderSchema } from '@/schemas/serviceOrder'
 import { NextRequest, NextResponse } from 'next/server'
@@ -48,7 +49,13 @@ export async function PUT(
 
     return new NextResponse(
       JSON.stringify(
-        await serviceOrderRepository.save(serviceOrder, serviceOrderId)
+        await serviceOrderRepository.save(
+          {
+            ...serviceOrder,
+            status: serviceOrder.status as ServiceOrderStatus,
+          },
+          serviceOrderId
+        )
       ),
       {
         status: 200,

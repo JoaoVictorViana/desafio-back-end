@@ -6,7 +6,7 @@ cypress
 *.css
 *.ico
 next-env.d.ts
-next.config.js
+next.config.mjs
 commitzenrc.js
 tsconfig.json
 commitzenrc.js

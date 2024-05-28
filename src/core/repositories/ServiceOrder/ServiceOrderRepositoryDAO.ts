@@ -15,6 +15,8 @@ import { DAO } from '@/core/facades/DAO'
 import { ServiceOrder } from '../../entities'
 import { ServiceOrderRepository } from './ServiceOrderRepository'
 
+const SECONDS_TO_MILISECONDS = 1000
+
 export class ServiceOrderRepositoryDAO implements ServiceOrderRepository {
   async all(): Promise<ServiceOrder[]> {
     const serviceOrders = await DAO.getData<ServiceOrder[]>(
@@ -25,6 +27,14 @@ export class ServiceOrderRepositoryDAO implements ServiceOrderRepository {
     if (!serviceOrders) return []
 
     return serviceOrders
+      .sort((a, b) => (a.created_at > b.created_at ? 1 : -1))
+      .map((serviceOrder) => ({
+        ...serviceOrder,
+        dt_order: new Date(
+          (serviceOrder.dt_order as unknown as { seconds: number }).seconds *
+            SECONDS_TO_MILISECONDS
+        ),
+      }))
   }
 
   async delete(id: string) {
@@ -32,7 +42,13 @@ export class ServiceOrderRepositoryDAO implements ServiceOrderRepository {
   }
 
   async find(id: string): Promise<ServiceOrder | undefined> {
-    return DAO.getData<ServiceOrder>('service_orders', id)
+    return DAO.getData<ServiceOrder>('service_orders', id).then((data) => ({
+      ...data,
+      dt_order: new Date(
+        (data.dt_order as unknown as { seconds: number }).seconds *
+          SECONDS_TO_MILISECONDS
+      ),
+    }))
   }
 
   async save(

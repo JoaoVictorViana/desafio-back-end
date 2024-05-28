@@ -13,8 +13,12 @@ import validators from '@/enums/validators'
 import { z } from 'zod'
 
 export const clientSchema = z.object({
+  id: z.string().nullish(),
   name: z.string().min(1, validators.REQUIRED),
   email: z.string().email(validators.EMAIL).min(1, validators.REQUIRED),
-  telephone: z.number().min(1, validators.REQUIRED),
+  telephone: z
+    .number()
+    .min(1, validators.REQUIRED)
+    .or(z.string().min(1, validators.REQUIRED)),
   address: z.string().min(1, validators.REQUIRED),
 })

@@ -21,7 +21,7 @@ export class ClientRepositoryDAO implements ClientRepository {
 
     if (!clients) return []
 
-    return clients
+    return clients.sort((a, b) => (a.created_at > b.created_at ? 1 : -1))
   }
 
   async delete(id: string) {

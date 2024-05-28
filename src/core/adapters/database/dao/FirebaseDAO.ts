@@ -23,6 +23,7 @@ import {
   setDoc,
   addDoc,
   deleteDoc,
+  Timestamp,
 } from 'firebase/firestore'
 
 export class FirebaseDAO<T extends DocumentData>
@@ -34,14 +35,22 @@ export class FirebaseDAO<T extends DocumentData>
 
   async addData(target: string, id: string, data: T): Promise<T> {
     if (!id) {
-      const document = await addDoc(collection(this.db, target), data)
+      const document = await addDoc(collection(this.db, target), {
+        ...data,
+        created_at: Timestamp.now(),
+        updated_at: Timestamp.now(),
+      })
 
       return { id: document.id, ...data }
     }
 
-    await setDoc(doc(this.db, target, id), data, {
-      merge: true,
-    })
+    await setDoc(
+      doc(this.db, target, id),
+      { ...data, updated_at: Timestamp.now() },
+      {
+        merge: true,
+      }
+    )
 
     return { id, ...data }
   }
