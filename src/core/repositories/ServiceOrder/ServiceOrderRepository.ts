@@ -15,4 +15,5 @@
 import { ServiceOrder } from '../../entities'
 import { Repository } from '../Repository'
 
-export interface ServiceOrderRepository extends Repository<ServiceOrder> {}
+export interface ServiceOrderRepository
+  extends Repository<Omit<ServiceOrder, 'id'>> {}

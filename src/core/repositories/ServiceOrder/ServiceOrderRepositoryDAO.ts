@@ -52,7 +52,7 @@ export class ServiceOrderRepositoryDAO implements ServiceOrderRepository {
   }
 
   async save(
-    data: Partial<ServiceOrder>,
+    data: Partial<Omit<ServiceOrder, 'id'>>,
     id?: string | undefined
   ): Promise<ServiceOrder> {
     const serviceOrder = await DAO.addData('service_orders', id ?? '', data)

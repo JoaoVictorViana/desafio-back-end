@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     const client = clientSchema.parse(data)
 
     return new NextResponse(
-      JSON.stringify(await clientRepository.save(client)),
+      JSON.stringify(await clientRepository.save(client as Partial<Client>)),
       {
         status: 200,
       }

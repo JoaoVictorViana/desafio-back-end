@@ -17,11 +17,11 @@ export function useClientForm({ afterSubmit }: Props) {
       data.id
         ? updateClient(data.id, {
             ...data,
-            telephone: data.telephone.replace(/\D/g, ''),
+            telephone: data.telephone.toString().replace(/\D/g, ''),
           })
         : createClient({
             ...data,
-            telephone: data.telephone.replace(/\D/g, ''),
+            telephone: data.telephone.toString().replace(/\D/g, ''),
           }),
   })
 

@@ -11,6 +11,7 @@
  */
 
 import repositories from '@/configs/repositories'
+import { Client } from '@/core/entities'
 import { ClientRepository } from '@/core/repositories/Client/ClientRepository'
 import { clientSchema } from '@/schemas/client'
 import { NextRequest, NextResponse } from 'next/server'
@@ -42,7 +43,9 @@ export async function PUT(
     const client = clientSchema.parse(data)
 
     return new NextResponse(
-      JSON.stringify(await clientRepository.save(client, clientId)),
+      JSON.stringify(
+        await clientRepository.save(client as Partial<Client>, clientId)
+      ),
       {
         status: 200,
       }

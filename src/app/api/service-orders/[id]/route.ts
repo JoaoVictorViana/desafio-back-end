@@ -51,7 +51,12 @@ export async function PUT(
       JSON.stringify(
         await serviceOrderRepository.save(
           {
-            ...serviceOrder,
+            client_id: serviceOrder.client_id?.toString() ?? '',
+            cost: Number(serviceOrder.cost ?? 0),
+            cost_estimated: Number(serviceOrder.cost_estimated),
+            dt_order: new Date(serviceOrder.dt_order),
+            description: serviceOrder.description,
+            observation: serviceOrder.observation,
             status: serviceOrder.status as ServiceOrderStatus,
           },
           serviceOrderId

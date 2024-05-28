@@ -25,7 +25,9 @@ export const ClientForm = ({ afterSubmit, data }: Props) => {
       schema={clientSchema}
       handleSubmit={handleSubmit}
       defaultValues={{
+        id: '',
         ...data,
+        telephone: data?.telephone.toString() ?? '',
       }}
     >
       <Grid className="grid-cols-2 gap-5 p-8">

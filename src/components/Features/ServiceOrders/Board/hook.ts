@@ -49,7 +49,7 @@ export function useBoard() {
 
   const updateServiceOrderMutation = useMutation({
     mutationFn: (serviceOrder: ServiceOrderFields) =>
-      updateServiceOrders(serviceOrder.id, serviceOrder),
+      updateServiceOrders(serviceOrder.id?.toString() ?? '', serviceOrder),
   })
 
   const deleteServiceOrderMutation = useMutation({
