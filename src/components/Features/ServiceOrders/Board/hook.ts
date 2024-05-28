@@ -119,9 +119,12 @@ export function useBoard() {
 
       if (!serviceOrder) return
 
-      queryClient.removeQueries({
-        queryKey: ['service-orders', { status: serviceOrder.status }],
-      })
+      queryClient.setQueriesData(
+        {
+          queryKey: ['service-orders', { status: serviceOrder.status }],
+        },
+        null
+      )
 
       updateServiceOrderMutation
         .mutateAsync({
@@ -137,6 +140,10 @@ export function useBoard() {
         .then(() => {
           queryClient.removeQueries({
             queryKey: ['service-orders', { status }],
+          })
+
+          queryClient.refetchQueries({
+            queryKey: ['service-orders', { status: serviceOrder.status }],
           })
           toast(`Ordem de serviço alterado para "${STATUS_NAME[status]}"!`)
         })

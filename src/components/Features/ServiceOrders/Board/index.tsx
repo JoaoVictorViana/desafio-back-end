@@ -10,6 +10,19 @@ import { SkeletonItemList } from './Skeleton'
 import { useBoard } from './hook'
 import { ServiceOrderForm } from '../Form'
 
+const getAvatarName = (name: string) => {
+  const nameSplited = name.split(' ')
+
+  if (nameSplited.length === 1) {
+    return `${name[0]}${name[1]}`.toLocaleUpperCase()
+  }
+
+  return (
+    nameSplited[0][0].toLocaleUpperCase() +
+    nameSplited[1][0].toLocaleUpperCase()
+  )
+}
+
 export const ServiceOrderBoard = () => {
   const {
     handleDeleteOrderService,
@@ -59,12 +72,13 @@ export const ServiceOrderBoard = () => {
                 key={item.id}
               >
                 <span className="board-card--header">#{item.id}</span>
-                <span className="board-card--body">
-                  {item.client.name} - {item.description}
-                </span>
-                <span className="board-card--footer">
-                  {item.dt_order.toLocaleDateString('pt-BR')}
-                </span>
+                <span className="board-card--body">{item.description}</span>
+                <Flex className="board-card--footer">
+                  <span className="board-card--avatar">
+                    {getAvatarName(item.client.name)}
+                  </span>
+                  <span>{item.dt_order.toLocaleDateString('pt-BR')}</span>
+                </Flex>
               </Flex>
             ))}
           </ReactSortable>
@@ -99,12 +113,13 @@ export const ServiceOrderBoard = () => {
                 key={item.id}
               >
                 <span className="board-card--header">#{item.id}</span>
-                <span className="board-card--body">
-                  {item.client.name} - {item.description}
-                </span>
-                <span className="board-card--footer">
-                  {item.dt_order.toLocaleDateString('pt-BR')}
-                </span>
+                <span className="board-card--body">{item.description}</span>
+                <Flex className="board-card--footer">
+                  <span className="board-card--avatar">
+                    {getAvatarName(item.client.name)}
+                  </span>
+                  <span>{item.dt_order.toLocaleDateString('pt-BR')}</span>
+                </Flex>
               </Flex>
             ))}
           </ReactSortable>
@@ -139,12 +154,13 @@ export const ServiceOrderBoard = () => {
                 key={item.id}
               >
                 <span className="board-card--header">#{item.id}</span>
-                <span className="board-card--body">
-                  {item.client.name} - {item.description}
-                </span>
-                <span className="board-card--footer">
-                  {item.dt_order.toLocaleDateString('pt-BR')}
-                </span>
+                <span className="board-card--body">{item.description}</span>
+                <Flex className="board-card--footer">
+                  <span className="board-card--avatar">
+                    {getAvatarName(item.client.name)}
+                  </span>
+                  <span>{item.dt_order.toLocaleDateString('pt-BR')}</span>
+                </Flex>
               </Flex>
             ))}
           </ReactSortable>
@@ -176,12 +192,13 @@ export const ServiceOrderBoard = () => {
                 key={item.id}
               >
                 <span className="board-card--header">#{item.id}</span>
-                <span className="board-card--body">
-                  {item.client.name} - {item.description}
-                </span>
-                <span className="board-card--footer">
-                  {item.dt_order.toLocaleDateString('pt-BR')}
-                </span>
+                <span className="board-card--body">{item.description}</span>
+                <Flex className="board-card--footer">
+                  <span className="board-card--avatar">
+                    {getAvatarName(item.client.name)}
+                  </span>
+                  <span>{item.dt_order.toLocaleDateString('pt-BR')}</span>
+                </Flex>
               </Flex>
             ))}
           </ReactSortable>

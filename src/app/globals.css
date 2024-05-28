@@ -63,6 +63,10 @@
   }
 
   .board-card--footer {
-    @apply text-xs;
+    @apply text-xs flex items-center justify-between w-full;
+  }
+
+  .board-card--avatar {
+    @apply p-2 bg-primary-200 rounded-full;
   }
 }
