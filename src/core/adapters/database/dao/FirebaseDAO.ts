@@ -64,7 +64,7 @@ export class FirebaseDAO<T extends DocumentData>
       const result: R[] = []
 
       querySnapshot.forEach((document) => {
-        result.push({ id: document.id, ...(document.data() as R) })
+        result.push({ ...(document.data() as R), id: document.id })
       })
 
       if (id) {
